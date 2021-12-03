@@ -6,8 +6,8 @@ const Routes = () => (
     <Router>
         <Suspense fallback={<div className="d-flex justify-content-center mt-5 pt-5"> <CircularProgress/> </div>}>
             <Switch>
-              <Route to="/" component={()=>{ return (<h1>Cadastro</h1>)}} />
-              <Route to="/login" component={()=>{ return (<h1>Login</h1>)}} />
+              <Route exact path="/" component={()=>{ return (<h1>Cadastro</h1>)}} />
+              <Route path="/login" component={()=>{ return (<h1>Login</h1>)}} />
             </Switch>
         </Suspense>
     </Router>
