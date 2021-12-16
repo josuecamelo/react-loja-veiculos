@@ -4,18 +4,12 @@ const initialState = {
     vehicles: {
         data: []
     },
-    vehicle: {
-        vehicle_features: []
-    },
-    vehicle_brand: [],
-    vehicle_model: [],
-    vehicle_version: [],
-    upload_photo: false,
+    vehicle: {},
     success: false,
     error: {}
 }
 
-export default (state = initialState, { type, payload, isLoadMore }) => {
+const vehiclesReducer = (state = initialState, { type, payload, isLoadMore }) => {
     switch (type) {
 
     case actionTypes.INDEX:
@@ -24,18 +18,6 @@ export default (state = initialState, { type, payload, isLoadMore }) => {
         }
 
         return { ...state, ...payload }
-
-    case actionTypes.UPDATE:
-        let index = state.vehicles.data.findIndex(item => item.id === payload.id)
-        state.vehicles.data[index] = payload
-
-        return {
-            ...state,
-            vehicles: {
-                ...state.vehicles,
-                data: state.vehicles.data
-            }
-        }
 
     case actionTypes.DESTROY:
         return {
@@ -55,35 +37,6 @@ export default (state = initialState, { type, payload, isLoadMore }) => {
             }
         }
 
-    case actionTypes.UPLOAD_PHOTO:
-        return {
-            ...state,
-            vehicle: {
-                ...state.vehicle,
-                vehicle_photos: [
-                    ...state.vehicle.vehicle_photos.concat(payload)
-                ]
-            }
-        }
-
-    case actionTypes.DELETE_PHOTO:
-        return {
-            ...state,
-            vehicle: {
-                ...state.vehicle,
-                vehicle_photos: state.vehicle.vehicle_photos.filter(item => item.id !== payload)
-            }
-        }
-
-    case actionTypes.REORDER_PHOTO:
-        return {
-            ...state,
-            vehicle: {
-                ...state.vehicle,
-                vehicle_photos: payload
-            }
-        }
-
     case actionTypes.SUCCESS:
         return {
             ...state,
@@ -100,3 +53,5 @@ export default (state = initialState, { type, payload, isLoadMore }) => {
         return state
     }
 }
+
+export default vehiclesReducer;
